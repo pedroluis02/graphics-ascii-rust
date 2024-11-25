@@ -1,4 +1,4 @@
-#[derive(Default)]
+#[derive(Debug, PartialEq)]
 pub struct Paint {
     stroke: char,
     fill: char,
@@ -18,7 +18,7 @@ impl Paint {
     }
 }
 
-#[derive(Default)]
+#[derive(Debug, PartialEq)]
 pub struct PaintBuilder {
     paint: Paint,
 }
@@ -52,4 +52,19 @@ impl PaintBuilder {
     pub fn build(self) -> Paint {
         self.paint
     }
+}
+
+#[test]
+fn builder_test() {
+    let paint = Paint {
+        stroke: '#',
+        fill: '|',
+        background: '-',
+    };
+    let paint_from_builder = PaintBuilder::new()
+        .stroke('#')
+        .fill('|')
+        .background('-')
+        .build();
+    assert_eq!(paint, paint_from_builder);
 }

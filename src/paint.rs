@@ -18,7 +18,7 @@ impl Paint {
     }
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug)]
 pub struct PaintBuilder {
     paint: Paint,
 }

@@ -6,6 +6,10 @@ pub struct Paint {
 }
 
 impl Paint {
+    pub fn builder() -> PaintBuilder {
+        PaintBuilder::new()
+    }
+
     pub fn to_string(self) -> String {
         format!(
             "Paint{{ stroke: '{}', fill: '{}', bg='{}' }}",
@@ -22,7 +26,11 @@ pub struct PaintBuilder {
 impl PaintBuilder {
     pub fn new() -> PaintBuilder {
         PaintBuilder {
-            paint: Self::default_paint(),
+            paint: Paint {
+                stroke: '#',
+                fill: ' ',
+                background: ' ',
+            },
         }
     }
 
@@ -43,13 +51,5 @@ impl PaintBuilder {
 
     pub fn build(self) -> Paint {
         self.paint
-    }
-
-    fn default_paint() -> Paint {
-        Paint {
-            stroke: '#',
-            fill: ' ',
-            background: ' ',
-        }
     }
 }

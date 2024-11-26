@@ -4,15 +4,15 @@ pub trait Writer {
 }
 
 #[derive(Clone, Copy)]
-pub struct Console {}
+pub struct ConsoleWriter {}
 
-impl Console {
+impl ConsoleWriter {
     pub fn new() -> Box<dyn Writer> {
         return Box::new(Self {});
     }
 }
 
-impl Writer for Console {
+impl Writer for ConsoleWriter {
     fn write(&self, value: char) {
         print!("{}", value);
     }

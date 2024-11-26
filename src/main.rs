@@ -1,7 +1,7 @@
 mod console;
 mod paint;
 
-use crate::console::Console;
+use crate::console::ConsoleWriter;
 use crate::paint::Paint;
 
 fn main() {
@@ -12,7 +12,7 @@ fn main() {
         .build();
     println!("{}", paint.to_string());
 
-    let console = Console::new();
+    let console = ConsoleWriter::new();
     console.write('A');
     console.write('A');
     console.write_jump();

@@ -10,7 +10,19 @@ impl Paint {
         PaintBuilder::new()
     }
 
-    pub fn to_string(self) -> String {
+    pub fn stroke(&self) -> char {
+        self.stroke
+    }
+
+    pub fn fill(&self) -> char {
+        self.fill
+    }
+
+    pub fn background(&self) -> char {
+        self.background
+    }
+
+    pub fn to_string(&self) -> String {
         format!(
             "Paint{{ stroke: '{}', fill: '{}', bg='{}' }}",
             self.stroke, self.fill, self.background,

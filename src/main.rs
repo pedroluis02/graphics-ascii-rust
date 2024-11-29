@@ -1,7 +1,9 @@
+mod circle;
 mod console;
+mod graphic;
 mod paint;
 
-use crate::console::ConsoleWriter;
+use crate::circle::CircleAscii;
 use crate::paint::Paint;
 
 fn main() {
@@ -12,8 +14,6 @@ fn main() {
         .build();
     println!("{}", paint.to_string());
 
-    let console = ConsoleWriter::new();
-    console.write('A');
-    console.write('A');
-    console.write_jump();
+    let graphic = CircleAscii::new(10, paint);
+    graphic.draw();
 }

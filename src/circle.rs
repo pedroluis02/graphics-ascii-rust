@@ -14,16 +14,16 @@ impl CircleAscii {
             writer: GraphicAsciiWritter::new(Some(paint), None),
             padding_vertical: 2,
             padding_horizontal: 5,
-            radius,
+            radius: if radius < 1 { 10 } else { radius },
         });
     }
 
-    fn draw_row(&self, index: i32, r: i32, length: i32) {
+    fn draw_row(&self, index: i32, length: i32) {
         let mut is_active = true;
         let mut is_inside = false;
 
         for x in -length..=length {
-            if self.pth(x, index) == r {
+            if self.pth(x, index) == self.radius {
                 self.writer.write_stroke();
 
                 if is_active && !is_inside {
@@ -32,7 +32,7 @@ impl CircleAscii {
                     is_inside = false;
                 }
             } else {
-                if is_inside && index != r && index != -r {
+                if is_inside && index != self.radius && index != -(self.radius) {
                     self.writer.write_fill();
 
                     if is_active {
@@ -64,15 +64,14 @@ impl CircleAscii {
 
 impl GraphicAscii for CircleAscii {
     fn draw(&self) {
-        let r = if self.radius < 1 { 10 } else { self.radius };
-        let width = r;
-        let length = r + (2 * self.padding_horizontal);
+        let width = self.radius;
+        let length = self.radius + (2 * self.padding_horizontal);
 
         self.draw_padding_vertical(length);
 
         let mut y = width;
         while y >= -width {
-            self.draw_row(y, r, length);
+            self.draw_row(y, length);
             self.writer.write_jump();
 
             y -= 2;
